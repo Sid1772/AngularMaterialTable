@@ -1,0 +1,105 @@
+<div>
+  <mat-toolbar class="header">
+    <span style="margin-top:10px"
+      ><img width="200px" [src]="dispalayicons['Logo']"
+    /></span>
+    <span class="example-spacer"></span>
+    <h4 style="font-weight:800">Open posts in e-conomic</h4>
+
+    <span class="example-spacer"></span>
+    <img width="20px" [src]="dispalayicons['Person']" />
+  </mat-toolbar>
+  <!-- <mat-horizontal-stepper width="10px">
+
+    <mat-step label="Step 1">
+      
+    </mat-step>
+  
+    <mat-step label="Step 2">
+    
+    </mat-step>
+  
+    <mat-step label="Step 3">
+    </mat-step>
+    
+  </mat-horizontal-stepper> -->
+  <mat-divider></mat-divider>
+  <div class="table">
+    <table mat-table [dataSource]="tableData">
+      <ng-container matColumnDef="Check">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            [checked]="allselected && selectedrows.length==rowcount"
+            [indeterminate]="selectedrows.length>0 && !allselected"
+            (change)="toggleAll()"
+          ></mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="toggle(element)"
+            [checked]="selectedrows.includes(element)"
+            [disabled]="element.Status=='Error' || element.Status=='Registered'"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="DueDate">
+        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+        <td mat-cell *matCellDef="let element">
+          <span
+            class="overdue"
+            title="Payment Overdue"
+            *ngIf="element.PaymentDate>=element.DueDate"
+            ><img [src]="dispalayicons['Pending']"
+          /></span>
+          {{element.DueDate| date:'dd/MM/yyyy'}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="SupplierName">
+        <th mat-header-cell *matHeaderCellDef>SupplierName</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.SupplierName}}{{element.Supplier}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Invoice">
+        <th mat-header-cell *matHeaderCellDef>Invoice</th>
+        <td mat-cell *matCellDef="let element">{{element.InvoiceNumber}}</td>
+      </ng-container>
+      <ng-container matColumnDef="VoucherNo">
+        <th mat-header-cell *matHeaderCellDef>VoucherNo</th>
+        <td mat-cell *matCellDef="let element">{{element.VoucherNo}}</td>
+      </ng-container>
+      <ng-container matColumnDef="PaymentAmount">
+        <th mat-header-cell *matHeaderCellDef>PaymentAmount</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.CurrencyCode+ ' '+element.Amount}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+          <img
+            [title]="element.Status"
+            width="20"
+            [src]="dispalayicons[element.Status]"
+          />
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        [title]="row.Status"
+        (click)="toggle(row)"
+        [class.registered]="row.Status=='Registered'"
+        [class.error]="row.Status=='Error'"
+        *matRowDef="let row; columns: displayedColumns;"
+      ></tr>
+    </table>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="footer">
+    <button mat-raised-button color="warn" class="button">
+      Continue <span *ngIf="selectedrows.length">{{selectedrows.length}}</span>
+    </button>
+  </div>
+</div>

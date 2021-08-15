@@ -1,0 +1,68 @@
+table {
+  width: 100%;
+}
+* {
+  font-family: 'Montserrat', sans-serif !important;
+}
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+}
+.table {
+  background-color: rgba(243, 245, 249, 255) !important;
+  padding: 2% 10% 6% 10%;
+}
+.span{
+  margin: 0 auto;
+}
+.error {
+  background-color: rgba(255, 243, 246);
+}
+.header {
+  background-color: white !important;
+  display:flex
+}
+.footer {
+  height: 2em;
+  text-align: left;
+  padding-left: 70%;
+}
+.button {
+  background-color: rgba(38, 200, 166, 255);
+  border-radius: 11px;
+  margin-top: 8px;
+  width: 106px;
+}
+h4 {
+  font-family: 'Montserrat' !important ;
+}
+.usericon {
+  position: absolute;
+  right: 0%;
+  top: 10%;
+}
+
+.mat-header-cell {
+  font-weight: 800 !important;
+}
+.registered td {
+  color: grey;
+}
+.overdue {
+  position: relative;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+/* .overdue[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -100%;
+  font-size: 8px;
+  height: 12px;
+  border: 1px solid;
+  width: 80px;
+  left: 0;
+} */
