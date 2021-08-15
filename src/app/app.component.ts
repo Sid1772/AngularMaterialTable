@@ -31,6 +31,7 @@ export class AppComponent {
   selectedrows = [];
   rowcount = 0;
   allselected = false;
+incompletepayments: number=0;
   constructor(private service: TableService) {
     this.service.getTableData().subscribe(
       (data: any) => {
@@ -55,6 +56,7 @@ export class AppComponent {
         invoice.Status = 'Error';
       } else if (this.checkpayments(invoice.Payments)) {
         invoice.Status = 'PartialPending';
+        invoice.StatusDetails=this.incompletepayments+" partial payment registered on this invoice"
         this.rowcount += 1;
       } else if (
         invoice.EntryAmount != invoice.Amount &&
@@ -75,11 +77,11 @@ export class AppComponent {
     });
   }
   checkpayments(inv) {
-    var incompletepayments = 0;
+    this.incompletepayments = 0;
     var status = false;
     for (let x = 0; x < inv.length; x++) {
       if (inv[x].BookkeepingStatus == 1) {
-        incompletepayments += 1;
+        this.incompletepayments += 1;
         status = true;
       }
     }

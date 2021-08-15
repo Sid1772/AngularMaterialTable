@@ -88,7 +88,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr
         mat-row
-        [title]="row.Status"
+        [title]="row.Status=='PartialPending'?row.StatusDetails:row.Status"
         (click)="toggle(row)"
         [class.registered]="row.Status=='Registered'"
         [class.error]="row.Status=='Error'"
